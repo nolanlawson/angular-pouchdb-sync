@@ -14,7 +14,7 @@ angular.module('todomvc')
 		$scope.newTodo = '';
 		$scope.editedTodo = null;
 
-		$scope.$watch('todos', function (newValue, oldValue) {
+		$scope.$watch('todos', function () {
 			$scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
 			$scope.completedCount = todos.length - $scope.remainingCount;
 			$scope.allChecked = !$scope.remainingCount;
