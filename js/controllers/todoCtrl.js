@@ -14,21 +14,6 @@ angular.module('todomvc')
 		$scope.newTodo = '';
 		$scope.editedTodo = null;
 
-		$scope.$watch('todos', function () {
-			$scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
-			$scope.completedCount = todos.length - $scope.remainingCount;
-			$scope.allChecked = !$scope.remainingCount;
-		}, true);
-
-		// Monitor the current route for changes and adjust the filter accordingly.
-		$scope.$on('$routeChangeSuccess', function () {
-			var status = $scope.status = $routeParams.status || '';
-
-			$scope.statusFilter = (status === 'active') ?
-				{ completed: false } : (status === 'completed') ?
-				{ completed: true } : null;
-		});
-
 		$scope.addTodo = function () {
 			var newTodo = $scope.newTodo.trim();
 			if (!newTodo.length) {
@@ -65,12 +50,6 @@ angular.module('todomvc')
 
 		$scope.removeTodo = function (todo) {
 			todos.splice(todos.indexOf(todo), 1);
-		};
-
-		$scope.clearCompletedTodos = function () {
-			$scope.todos = todos = todos.filter(function (val) {
-				return !val.completed;
-			});
 		};
 
 		$scope.markAll = function (completed) {
